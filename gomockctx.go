@@ -17,25 +17,6 @@ type (
 
 var ctxKey contextKey = "gomockctx context ID"
 
-func newCtxID() contextValue {
-	id, err := randString(64)
-	if err != nil {
-		panic(err)
-	}
-
-	return contextValue(id)
-}
-
-func value(ctx context.Context) contextValue {
-	var value contextValue
-	v := ctx.Value(ctxKey)
-	if s, ok := v.(contextValue); ok {
-		value = s
-	}
-
-	return value
-}
-
 // New returns a context as a child of the given parent, and with a randomized
 // gomockctx ID value set, making it a gomockctx context. This can then be used
 // with Is to get a gomock Matcher which returns true for the context from New,
@@ -57,19 +38,30 @@ func Is(ctx context.Context) gomock.Matcher {
 	return WithValue(ctxKey, value(ctx))
 }
 
-// WithValue creates a generic gomock context matcher which returns true for any
-// context which has the specified key/value.
+// ID returns the gomockctx ID value in the given context, or a empty string if
+// the context does not have a gomockctx ID value.
+func ID(ctx context.Context) string {
+	if ctx == nil {
+		return ""
+	}
+
+	return string(value(ctx))
+}
+
+// Any returns a gomock.Matcher which matches any context.Context object.
+func Any() gomock.Matcher {
+	return gomock.AssignableToTypeOf(
+		reflect.TypeOf((*context.Context)(nil)).Elem(),
+	)
+}
+
+// WithValue returns a gomock.Matcher which matches any context that has the
+// specified key and value.
 func WithValue(key interface{}, value interface{}) gomock.Matcher {
 	return &contextMatcher{
 		key:   key,
 		value: value,
 	}
-}
-
-// ID returns the gomockctx ID value in the given context, or a empty string if
-// it not a gomockctx context.
-func ID(ctx context.Context) string {
-	return string(value(ctx))
 }
 
 type contextMatcher struct {
@@ -79,15 +71,37 @@ type contextMatcher struct {
 
 var _ gomock.Matcher = &contextMatcher{}
 
-func (e *contextMatcher) Matches(x interface{}) bool {
-	ctx, ok := x.(context.Context)
-	if !ok {
-		return false
+func (cm *contextMatcher) Matches(x interface{}) bool {
+	if ctx, ok := x.(context.Context); ok {
+		return reflect.DeepEqual(cm.value, ctx.Value(cm.key))
 	}
 
-	return reflect.DeepEqual(e.value, ctx.Value(e.key))
+	return false
 }
 
-func (e *contextMatcher) String() string {
-	return fmt.Sprintf(`context with "%+v" = "%+v"`, e.key, e.value)
+func (cm *contextMatcher) String() string {
+	return fmt.Sprintf(`context with "%+v" = "%+v"`, cm.key, cm.value)
+}
+
+func newCtxID() contextValue {
+	id, err := randString(64)
+	if err != nil {
+		panic(err)
+	}
+
+	return contextValue(id)
+}
+
+func value(ctx context.Context) contextValue {
+	var value contextValue
+	if ctx == nil {
+		return value
+	}
+
+	v := ctx.Value(ctxKey)
+	if s, ok := v.(contextValue); ok {
+		value = s
+	}
+
+	return value
 }
