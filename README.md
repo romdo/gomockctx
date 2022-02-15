@@ -26,6 +26,8 @@ import "github.com/romdo/gomockctx"
 
 ## Usage
 
+Match against a specific context or any of its child contexts:
+
 ```go
 // Create a context with a gomockctx ID value.
 ctx := gomockctx.New(context.Background())
@@ -37,6 +39,22 @@ someMock.EXPECT().
 
 // Use context with gomockctx ID when calling function.
 someMock.Get(ctx, "foo")
+```
+
+Match against a context containing a specific value:
+
+```go
+someMock.EXPECT().
+	Get(gomockctx.WithValue(myCtxKey, "hello"), "foo").
+	Return("bar", nil)
+```
+
+Match against any context:
+
+```go
+someMock.EXPECT().
+	Get(gomockctx.Any(), "foo").
+	Return("bar", nil)
 ```
 
 ## Documentation
