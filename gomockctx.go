@@ -59,18 +59,6 @@ func Eq(ctx context.Context) gomock.Matcher {
 	return WithValue(ctxKey, getValue(ctx))
 }
 
-// Is accepts a context with a gomockctx ID value (as returned from New), and
-// returns a gomock.Matcher which returns true for the given context, and any
-// child contexts of it.
-//
-// If ctx was not returned from New, the resulting matcher will ALWAYS return
-// false.
-//
-// Deprecated: Renamed to Eq().
-func Is(ctx context.Context) gomock.Matcher {
-	return Eq(ctx)
-}
-
 // ID returns the gomockctx ID value in the given context, or a empty string if
 // the context does not have a gomockctx ID value.
 func ID(ctx context.Context) string {

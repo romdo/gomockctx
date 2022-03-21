@@ -109,10 +109,6 @@ func TestEq(t *testing.T) {
 	}
 }
 
-func TestIs(t *testing.T) {
-	TestEq(t)
-}
-
 func TestID(t *testing.T) {
 	tests := []struct {
 		name string
