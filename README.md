@@ -34,7 +34,7 @@ ctx := gomockctx.New(context.Background())
 
 // Match against a context with a gomockctx ID.
 someMock.EXPECT().
-	Get(gomockctx.Is(ctx), "foo").
+	Get(gomockctx.Eq(ctx), "foo").
 	Return("bar", nil)
 
 // Use context with gomockctx ID when calling function.

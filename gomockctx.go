@@ -40,7 +40,7 @@ func getValue(ctx context.Context) contextValue {
 
 // New returns a context as a child of the given parent, which includes a
 // randomized gomockctx ID value set, which makes it a gomockctx context. This
-// can then be used with Is to get a gomock Matcher which returns true for the
+// can then be used with Eq to get a gomock Matcher which returns true for the
 // context from New, or any child contexts of it.
 //
 // If crypto/rand returns an error, this will panic trying to generate the
