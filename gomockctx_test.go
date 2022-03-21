@@ -34,7 +34,7 @@ func TestNew(t *testing.T) {
 	assert.Len(t, ids, limit)
 }
 
-func TestIs(t *testing.T) {
+func TestEq(t *testing.T) {
 	type strKey string
 
 	type args struct {
@@ -100,13 +100,17 @@ func TestIs(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := Is(tt.args.ctx)
+			got := Eq(tt.args.ctx)
 
 			assert.Implements(t, (*gomock.Matcher)(nil), got)
 
 			assert.Equal(t, tt.want, got)
 		})
 	}
+}
+
+func TestIs(t *testing.T) {
+	TestEq(t)
 }
 
 func TestID(t *testing.T) {
