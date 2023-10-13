@@ -11,7 +11,7 @@ jobs:
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v2
         with:
-          version: v1.44
+          version: v1.54
         env:
           VERBOSE: "true"
 
@@ -22,7 +22,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-go@v2
         with:
-          go-version: 1.15
+          go-version: 1.18
       - uses: actions/cache@v2
         with:
           path: ~/go/pkg/mod
@@ -39,7 +39,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-go@v2
         with:
-          go-version: 1.16
+          go-version: 1.18
       - uses: actions/cache@v2
         with:
           path: ~/go/pkg/mod
@@ -64,9 +64,10 @@ jobs:
       fail-fast: false
       matrix:
         go_version:
-          - "1.15"
-          - "1.16"
-          - "1.17"
+          - "1.18"
+          - "1.19"
+          - "1.20"
+          - "1.21"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
