@@ -5,7 +5,7 @@ package gomockctx
 import (
 	"context"
 
-	"github.com/golang/mock/gomock"
+	"go.uber.org/mock/gomock"
 )
 
 type (

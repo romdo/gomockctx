@@ -3,8 +3,8 @@ module github.com/romdo/gomockctx
 go 1.18
 
 require (
-	github.com/golang/mock v1.6.0
 	github.com/stretchr/testify v1.7.0
+	go.uber.org/mock v0.3.0
 )
 
 require (
