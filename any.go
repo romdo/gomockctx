@@ -3,7 +3,7 @@ package gomockctx
 import (
 	"context"
 
-	"github.com/golang/mock/gomock"
+	"go.uber.org/mock/gomock"
 )
 
 // Any returns a gomock.Matcher which matches any context.Context object.
