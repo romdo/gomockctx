@@ -12,7 +12,7 @@
 <p align="center">
   <a href="https://pkg.go.dev/github.com/romdo/gomockctx"><img src="https://img.shields.io/badge/%E2%80%8B-reference-387b97.svg?logo=go&logoColor=white" alt="Go Reference"></a>
   <a href="https://github.com//romdo/gomockctx/releases"><img src="https://img.shields.io/github/v/tag/romdo/gomockctx?label=release" alt="GitHub tag (latest SemVer)"></a>
-  <a href="https://github.com/romdo/gomockctx/actions"><img src="https://img.shields.io/github/workflow/status/romdo/gomockctx/CI.svg?logo=github" alt="Actions Status"></a>
+  <a href="https://github.com/romdo/gomockctx/actions"><img src="https://img.shields.io/github/actions/workflow/status/romdo/gomockctx/ci.yml?logo=github" alt="Actions Status"></a>
   <a href="https://codeclimate.com/github/romdo/gomockctx"><img src="https://img.shields.io/codeclimate/coverage/romdo/gomockctx.svg?logo=code%20climate" alt="Coverage"></a>
   <a href="https://github.com/romdo/gomockctx/issues"><img src="https://img.shields.io/github/issues-raw/romdo/gomockctx.svg?style=flat&logo=github&logoColor=white" alt="GitHub issues"></a>
   <a href="https://github.com/romdo/gomockctx/pulls"><img src="https://img.shields.io/github/issues-pr-raw/romdo/gomockctx.svg?style=flat&logo=github&logoColor=white" alt="GitHub pull requests"></a>
